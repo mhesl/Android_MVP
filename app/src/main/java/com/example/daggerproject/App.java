@@ -2,6 +2,8 @@ package com.example.daggerproject;
 
 import android.app.Application;
 
+import com.example.daggerproject.login.LoginModel;
+
 
 public class App extends Application {
 
@@ -11,7 +13,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        component = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
+        component = DaggerApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .loginModule(new LoginModel())
+                .build();
     }
 
 
