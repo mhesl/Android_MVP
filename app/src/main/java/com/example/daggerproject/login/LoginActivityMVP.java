@@ -5,7 +5,7 @@ public interface LoginActivityMVP {
     interface View{
 
         String getFirstName();
-        String getLastname();
+        String getLastName();
 
         void showUserNotAvailable();
         void showInputError();

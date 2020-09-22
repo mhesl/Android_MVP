@@ -1,5 +1,7 @@
 package com.example.daggerproject;
 
+import com.example.daggerproject.login.LoginActivity;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -8,5 +10,5 @@ import dagger.Component;
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
 
-    void inject (Main2Activity target);
+    void inject (LoginActivity target);
 }
