@@ -3,6 +3,7 @@ package com.example.daggerproject;
 import android.app.Application;
 
 import com.example.daggerproject.login.LoginModel;
+import com.example.daggerproject.login.LoginModule;
 
 
 public class App extends Application {
@@ -15,7 +16,7 @@ public class App extends Application {
 
         component = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                .loginModule(new LoginModel())
+                .loginModule(new LoginModule())
                 .build();
     }
 
