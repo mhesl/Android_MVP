@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
@@ -34,6 +37,33 @@ public class PresenterTests {
     public void noInteractionWithView(){
         presenter.getCurrentUser();
         verifyZeroInteractions(mockView);
+    }
+
+    @Test
+    public void loadTheUserFromTheRepositoryWhenValidUserIsPresent(){
+        when(mockLoginModel.getUser()).thenReturn(user);
+        presenter.getCurrentUser();
+
+        //verify model instructions
+        verify(mockLoginModel, times(1)).getUser();
+
+        //verify view instructions
+        verify(mockView , times(1)).setFirstName("FOX");
+        verify(mockView , times(1)).setLastName("Rider");
+        verify(mockView , never()).showUserNotAvailable();
+    }
+
+    @Test
+    public void shouldShowErrorMessageWhenUserIsNull(){
+        when(mockLoginModel.getUser()).thenReturn(null);
+        presenter.getCurrentUser();
+        //verify model instructions
+        verify(mockLoginModel, times(1)).getUser();
+
+        //verify view instructions
+        verify(mockView , never()).setFirstName("FOX");
+        verify(mockView , never()).setLastName("Rider");
+        verify(mockView , never()).showUserNotAvailable();
     }
 
 
